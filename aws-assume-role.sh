@@ -2,21 +2,6 @@
 
 set -euo pipefail
 
-# Detect if script is being sourced or executed
-is_sourced() {
-  [[ "${BASH_SOURCE[0]}" != "${0}" ]]
-}
-
-if ! is_sourced; then
-  echo "⚠️  Please run this script with:"
-  echo ""
-  echo "    source $0"
-  echo ""
-  echo "This is required to export credentials into your current shell."
-  echo "The script will now return without doing anything."
-  return 0 2>/dev/null || exit 0
-fi
-
 read -p "Enter source AWS CLI profile (leave blank to use 'default'): " PROFILE
 PROFILE=${PROFILE:-default}
 
