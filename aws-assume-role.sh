@@ -2,15 +2,19 @@
 
 set -euo pipefail
 
-# Check if script is being sourced
-(return 0 2>/dev/null) || {
+# Detect if script is being sourced or executed
+is_sourced() {
+  [[ "${BASH_SOURCE[0]}" != "${0}" ]]
+}
+
+if ! is_sourced; then
   echo "⚠️  Please run this script with:"
   echo ""
   echo "    source $0"
   echo ""
   echo "This is required to export credentials into your current shell."
   exit 1
-}
+fi
 
 read -p "Enter source AWS CLI profile (leave blank to use 'default'): " PROFILE
 PROFILE=${PROFILE:-default}
@@ -32,7 +36,6 @@ AWS_ACCESS_KEY_ID=$(jq -r '.Credentials.AccessKeyId' <<< "$CREDS")
 AWS_SECRET_ACCESS_KEY=$(jq -r '.Credentials.SecretAccessKey' <<< "$CREDS")
 AWS_SESSION_TOKEN=$(jq -r '.Credentials.SessionToken' <<< "$CREDS")
 
-# Output export statements to affect parent shell
 export AWS_ACCESS_KEY_ID
 export AWS_SECRET_ACCESS_KEY
 export AWS_SESSION_TOKEN
