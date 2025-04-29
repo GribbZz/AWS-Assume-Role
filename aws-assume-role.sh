@@ -13,7 +13,8 @@ if ! is_sourced; then
   echo "    source $0"
   echo ""
   echo "This is required to export credentials into your current shell."
-  exit 1
+  echo "The script will now return without doing anything."
+  return 0 2>/dev/null || exit 0
 fi
 
 read -p "Enter source AWS CLI profile (leave blank to use 'default'): " PROFILE
