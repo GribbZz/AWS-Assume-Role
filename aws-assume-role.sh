@@ -30,3 +30,6 @@ echo -e "\n✅ AWS credentials assumed and exported:"
 echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID"
 echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY"
 echo "AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN"
+
+echo -e "\n⚠️ For scoutsuite use the following one liner:"
+echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID; export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY; AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN"
